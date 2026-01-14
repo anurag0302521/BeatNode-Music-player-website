@@ -1,0 +1,29 @@
+<?php 
+            $pid= intval($_GET['album_id']);
+            if( isset( $_GET['pid'] ) ) {
+
+                echo("Bhakk");
+    
+            }
+            else{
+                echo(65);
+            }
+            echo ($album_id);
+            $sql= "SELECT * FROM song1 where album_id = :pid";
+            $query =$conn->prepare($sql);
+            $query = bindParam(':pid',$pid, PDO::PARAM_STR);
+            $query -> execute();
+            $results = $query->fetchAll(PDO::FETCH_OBJ);
+            $cnt=1;
+
+            if($query->rowCount() > 0){
+                foreach($results as $result){
+                    
+            ?>
+                <tr>
+                    <td><h6 id="title" style="color:white"><?php echo $row_fetch['title'];  ?></h6></td>
+                    <td><h6 id="category" style="color:white"><?php echo $row_fetch['name'];  ?></h6></td>
+                    <td><audio src="admin/upload/tanhajis/<?php echo $row_fetch['tanhaji'];  ?>" controls></audio></td>
+                   
+            </tr>
+            <?php } }  ?>
